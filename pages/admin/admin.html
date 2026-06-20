@@ -1,41 +1,123 @@
 <section class="space-y-8 fade-in">
-    <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
-        <div>
-            <h2 class="text-3xl font-bold">System Administration Command Center</h2>
-            <p class="text-slate-400">Manage global configuration, pricing, users, and system integrity.</p>
+  <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+    <div>
+      <h2 class="text-3xl font-bold">System Administration Command Center</h2>
+      <p class="text-slate-400">Manage global configuration, pricing, users, and system integrity.</p>
+    </div>
+    <div class="badge badge-warning">Admin Access</div>
+  </div>
+
+  <div class="grid md:grid-cols-4 gap-4">
+    <div class="kpi-card"><div class="kpi-label">Venue Utilization</div><div class="kpi-value text-cyan-400">84.2%</div></div>
+    <div class="kpi-card"><div class="kpi-label">Revenue (30d)</div><div class="kpi-value text-emerald-400">$34,890</div></div>
+    <div class="kpi-card"><div class="kpi-label">Active Events</div><div class="kpi-value text-indigo-400">12</div></div>
+    <div class="kpi-card"><div class="kpi-label">System Alerts</div><div class="kpi-value text-amber-400">1</div></div>
+  </div>
+
+  <!-- REVENUE CHART + UTILIZATION -->
+  <div class="grid lg:grid-cols-3 gap-6">
+    <div class="card lg:col-span-2">
+      <h3 class="card-title">Revenue Trend (30 days)</h3>
+      <canvas id="revenueChart" height="110"></canvas>
+    </div>
+    <div class="card space-y-4">
+      <h3 class="card-title">Venue Utilization</h3>
+      <div class="space-y-3 text-sm">
+        <div><div class="flex justify-between mb-1"><span>Blue Hall</span><span class="text-slate-400">92%</span></div><div class="h-2 rounded-full bg-slate-800"><div class="h-2 rounded-full bg-cyan-400" style="width:92%"></div></div></div>
+        <div><div class="flex justify-between mb-1"><span>Orange Hall</span><span class="text-slate-400">88%</span></div><div class="h-2 rounded-full bg-slate-800"><div class="h-2 rounded-full bg-orange-400" style="width:88%"></div></div></div>
+        <div><div class="flex justify-between mb-1"><span>Green Hub</span><span class="text-slate-400">76%</span></div><div class="h-2 rounded-full bg-slate-800"><div class="h-2 rounded-full bg-emerald-400" style="width:76%"></div></div></div>
+        <div><div class="flex justify-between mb-1"><span>Yellow Studio</span><span class="text-slate-400">61%</span></div><div class="h-2 rounded-full bg-slate-800"><div class="h-2 rounded-full bg-yellow-400" style="width:61%"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BILLING + CARD -->
+  <div class="grid md:grid-cols-2 gap-6 items-center">
+    <div class="flex justify-center">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <p class="heading_8264">MASTERCARD</p>
+            <svg class="logo" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 48 48">
+              <path fill="#ff9800" d="M32 10A14 14 0 1 0 32 38A14 14 0 1 0 32 10Z"></path>
+              <path fill="#d50000" d="M16 10A14 14 0 1 0 16 38A14 14 0 1 0 16 10Z"></path>
+              <path fill="#ff3d00" d="M18,24c0,4.755,2.376,8.95,6,11.48c3.624-2.53,6-6.725,6-11.48s-2.376-8.95-6-11.48 C20.376,15.05,18,19.245,18,24z"></path>
+            </svg>
+            <p class="number">9759 2484 5269 6576</p>
+            <p class="valid_thru">VALID THRU</p>
+            <p class="date_8264">1 2 / 2 4</p>
+            <p class="name">BRUCE WAYNE</p>
+          </div>
+          <div class="flip-card-back">
+            <div class="strip"></div>
+            <div class="mstrip"></div>
+            <div class="sstrip"><p class="code">***</p></div>
+          </div>
         </div>
-        <div class="badge badge-warning">Admin Access</div>
+      </div>
     </div>
-
-    <div class="grid md:grid-cols-4 gap-4">
-        <div class="kpi-card"><div class="kpi-label">Venue Utilization</div><div class="kpi-value text-cyan-400">84.2%</div></div>
-        <div class="kpi-card"><div class="kpi-label">Revenue (30d)</div><div class="kpi-value text-emerald-400">$34,890</div></div>
-        <div class="kpi-card"><div class="kpi-label">Active Events</div><div class="kpi-value text-indigo-400">12</div></div>
-        <div class="kpi-card"><div class="kpi-label">System Alerts</div><div class="kpi-value text-amber-400">1</div></div>
-    </div>
-
     <div class="card space-y-3">
-        <h3 class="card-title">Approval Queue</h3>
-        <div class="flex justify-between items-center p-3 rounded-xl border border-slate-800 bg-slate-900">
-            <div><div class="font-medium text-sm">Startup Albania Summit</div><div class="text-slate-500 text-xs">Discounted quote — Orange Hall</div></div>
-            <div class="flex gap-2"><button class="badge badge-success">Approve</button><button class="badge badge-danger">Reject</button></div>
-        </div>
-        <div class="flex justify-between items-center p-3 rounded-xl border border-slate-800 bg-slate-900">
-            <div><div class="font-medium text-sm">Design Week Tirana</div><div class="text-slate-500 text-xs">Projector #3 double-booking override</div></div>
-            <div class="flex gap-2"><button class="badge badge-success">Approve</button><button class="badge badge-danger">Reject</button></div>
-        </div>
-        <div class="flex justify-between items-center p-3 rounded-xl border border-slate-800 bg-slate-900">
-            <div><div class="font-medium text-sm">Private Wedding Reception</div><div class="text-slate-500 text-xs">Late request — under 48h notice</div></div>
-            <div class="flex gap-2"><button class="badge badge-success">Approve</button><button class="badge badge-danger">Reject</button></div>
-        </div>
+      <h3 class="card-title">Billing Overview</h3>
+      <div class="flex justify-between text-sm"><span class="text-slate-400">This month</span><strong>$34,890</strong></div>
+      <div class="flex justify-between text-sm"><span class="text-slate-400">Pending payouts</span><strong class="text-amber-400">$2,150</strong></div>
+      <div class="flex justify-between text-sm"><span class="text-slate-400">Next payout</span><strong>Jul 1, 2026</strong></div>
+      <div class="flex justify-between text-sm"><span class="text-slate-400">Payment method</span><strong>Mastercard •••• 6576</strong></div>
+    </div>
+  </div>
+
+  <!-- APPROVAL QUEUE + ACTIVITY FEED -->
+  <div class="grid lg:grid-cols-3 gap-6">
+    <div class="card space-y-3 lg:col-span-2">
+      <h3 class="card-title">Approval Queue</h3>
+      <div class="flex justify-between items-center p-3 rounded-xl border border-slate-800 bg-slate-900">
+        <div><div class="font-medium text-sm">Startup Albania Summit</div><div class="text-slate-500 text-xs">Discounted quote — Orange Hall</div></div>
+        <div class="flex gap-2"><button class="badge badge-success">Approve</button><button class="badge badge-danger">Reject</button></div>
+      </div>
+      <div class="flex justify-between items-center p-3 rounded-xl border border-slate-800 bg-slate-900">
+        <div><div class="font-medium text-sm">Design Week Tirana</div><div class="text-slate-500 text-xs">Projector #3 double-booking override</div></div>
+        <div class="flex gap-2"><button class="badge badge-success">Approve</button><button class="badge badge-danger">Reject</button></div>
+      </div>
+      <div class="flex justify-between items-center p-3 rounded-xl border border-slate-800 bg-slate-900">
+        <div><div class="font-medium text-sm">Private Wedding Reception</div><div class="text-slate-500 text-xs">Late request — under 48h notice</div></div>
+        <div class="flex gap-2"><button class="badge badge-success">Approve</button><button class="badge badge-danger">Reject</button></div>
+      </div>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-4">
-        <button onclick="loadPage('admin-staff')" class="card text-left hover:border-cyan-500/40 transition"><i data-lucide="users" class="text-cyan-400 mb-2"></i><h3 class="card-title mb-1">Staff Table</h3><p class="card-subtitle">View roster and shift status.</p></button>
-        <button onclick="loadPage('admin-organizers')" class="card text-left hover:border-cyan-500/40 transition"><i data-lucide="building-2" class="text-emerald-400 mb-2"></i><h3 class="card-title mb-1">Organizator Table</h3><p class="card-subtitle">Registered organizations.</p></button>
-        <button onclick="loadPage('admin-pricing')" class="card text-left hover:border-cyan-500/40 transition"><i data-lucide="circle-dollar-sign" class="text-indigo-400 mb-2"></i><h3 class="card-title mb-1">Pricing Management</h3><p class="card-subtitle">Space and asset rates.</p></button>
-        <button onclick="loadPage('calendar')" class="card text-left hover:border-cyan-500/40 transition"><i data-lucide="calendar" class="text-amber-400 mb-2"></i><h3 class="card-title mb-1">Events Calendar</h3><p class="card-subtitle">Weekly schedule across venues.</p></button>
-        <button onclick="loadPage('admin-assign')" class="card text-left hover:border-cyan-500/40 transition"><i data-lucide="user-check" class="text-rose-400 mb-2"></i><h3 class="card-title mb-1">Assign Events</h3><p class="card-subtitle">Match staff to event tasks.</p></button>
-        <button onclick="loadPage('admin-reports')" class="card text-left hover:border-cyan-500/40 transition"><i data-lucide="bar-chart-3" class="text-violet-400 mb-2"></i><h3 class="card-title mb-1">Reports</h3><p class="card-subtitle">Audit log and event overview.</p></button>
+    <div class="card space-y-4">
+      <h3 class="card-title">Recent Activity</h3>
+      <div class="space-y-3 text-sm border-l border-slate-800 pl-4">
+        <div><div class="text-xs text-slate-500">10:42</div><p class="text-slate-300">Admin approved Tech Meetup quote</p></div>
+        <div><div class="text-xs text-slate-500">09:58</div><p class="text-amber-400">Conflict flagged: Projector #3</p></div>
+        <div><div class="text-xs text-slate-500">09:10</div><p class="text-slate-300">New request: Heritage Photo Exhibition</p></div>
+        <div><div class="text-xs text-slate-500">08:33</div><p class="text-slate-300">Payout processed — $4,200</p></div>
+      </div>
     </div>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-4">
+    <button onclick="loadPage('admin-staff')" class="card text-left hover:border-cyan-500/40 transition">
+      <i data-lucide="users" class="text-cyan-400 mb-2"></i>
+      <h3 class="card-title mb-1">Staff Table</h3><p class="card-subtitle">View roster and shift status.</p>
+    </button>
+    <button onclick="loadPage('admin-organizers')" class="card text-left hover:border-cyan-500/40 transition">
+      <i data-lucide="building-2" class="text-emerald-400 mb-2"></i>
+      <h3 class="card-title mb-1">Organizator Table</h3><p class="card-subtitle">Registered organizations.</p>
+    </button>
+    <button onclick="loadPage('admin-pricing')" class="card text-left hover:border-cyan-500/40 transition">
+      <i data-lucide="circle-dollar-sign" class="text-indigo-400 mb-2"></i>
+      <h3 class="card-title mb-1">Pricing Management</h3><p class="card-subtitle">Space and asset rates.</p>
+    </button>
+    <button onclick="loadPage('calendar')" class="card text-left hover:border-cyan-500/40 transition">
+      <i data-lucide="calendar" class="text-amber-400 mb-2"></i>
+      <h3 class="card-title mb-1">Events Calendar</h3><p class="card-subtitle">Weekly schedule across venues.</p>
+    </button>
+    <button onclick="loadPage('admin-assign')" class="card text-left hover:border-cyan-500/40 transition">
+      <i data-lucide="user-check" class="text-rose-400 mb-2"></i>
+      <h3 class="card-title mb-1">Assign Events</h3><p class="card-subtitle">Match staff to event tasks.</p>
+    </button>
+    <button onclick="loadPage('admin-reports')" class="card text-left hover:border-cyan-500/40 transition">
+      <i data-lucide="bar-chart-3" class="text-violet-400 mb-2"></i>
+      <h3 class="card-title mb-1">Reports</h3><p class="card-subtitle">Audit log and event overview.</p>
+    </button>
+  </div>
 </section>

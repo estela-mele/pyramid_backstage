@@ -8,17 +8,17 @@ PAGE LOADER
 // in router.js or app.js
 var tours = { red: 'assets/red-flythrough.mp4' };
 function openTour(id) {
-  if (!tours[id]) return;
-  var v = document.getElementById('tour-video');
-  v.src = tours[id];
-  document.getElementById('tour-modal').classList.remove('hidden');
-  v.play();
+    if (!tours[id]) return;
+    var v = document.getElementById('tour-video');
+    v.src = tours[id];
+    document.getElementById('tour-modal').classList.remove('hidden');
+    v.play();
 }
 function closeTour(e) {
-  if (e.target.id !== 'tour-modal' && e.target.closest('button') === null) return;
-  var v = document.getElementById('tour-video');
-  v.pause(); v.src = '';
-  document.getElementById('tour-modal').classList.add('hidden');
+    if (e.target.id !== 'tour-modal' && e.target.closest('button') === null) return;
+    var v = document.getElementById('tour-video');
+    v.pause(); v.src = '';
+    document.getElementById('tour-modal').classList.add('hidden');
 }
 window.openTour = openTour;
 window.closeTour = closeTour;
@@ -107,9 +107,9 @@ function updateNavigation(clickedButton, pageName) {
     // dropdown items (organizer/admin/inventory submenu pages) -> highlight parent button
     var parentKey = pageName && pageName.indexOf('admin') === 0 ? 'admin'
         : (pageName === 'create-event' || pageName === 'documents' || pageName === 'events-archive' || pageName === 'track-tickets') ? 'organizer'
-        : (pageName === 'inventory-assets') ? 'inventory'
-        : (pageName && pageName.indexOf('coordinator-') === 0) ? 'coordinator'
-        : pageName;
+            : (pageName === 'inventory-assets') ? 'inventory'
+                : (pageName && pageName.indexOf('coordinator-') === 0) ? 'coordinator'
+                    : pageName;
 
     var btn = document.querySelector(`[data-page="${parentKey}"]`);
     if (btn) btn.classList.add("active-nav");
@@ -191,12 +191,115 @@ function initializeOrganizerPage() {
 
 function initializeCreateEventPage() {
     const form = document.getElementById("event-request-form");
-    if (form) form.addEventListener("submit", triggerCopilot);
+    if (!form) return;
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const events = JSON.parse(localStorage.getItem('pyramid-events') || '[]');
+        events.push({
+            title: document.getElementById('req-title')?.value,
+            org: document.getElementById('req-org')?.value,
+            email: document.getElementById('req-email')?.value,
+            venue: document.getElementById('req-venue')?.value,
+            size: document.getElementById('req-size')?.value,
+            date: document.querySelector('input[type=date]')?.value,
+            chairs: document.querySelectorAll('input[type=number]')[1]?.value || 0,
+            tables: document.querySelectorAll('input[type=number]')[2]?.value || 0,
+            mics: document.querySelectorAll('input[type=number]')[3]?.value || 0,
+            screens: document.querySelectorAll('input[type=number]')[4]?.value || 0,
+            projectors: document.querySelectorAll('input[type=number]')[5]?.value || 0,
+            stage: document.querySelectorAll('input[type=number]')[6]?.value || 0,
+            catering: document.getElementById('req-catering')?.checked,
+            status: 'Under Review'
+        });
+        localStorage.setItem('pyramid-events', JSON.stringify(events));
+        triggerCopilot(e);
+    });
 }
 
 function initializeEventsArchivePage() {
-    renderEventTable("organizer-events-table");
+    renderArchive();
 }
+
+var RATES = { venue: 800, chair: 2, table: 15, mic: 50, screen: 100, projector: 120, stage: 300, catering: 500 };
+
+function calcBill(e) {
+    return [
+        { label: 'Venue rental', qty: 1, rate: RATES.venue },
+        { label: 'Chairs', qty: +e.chairs, rate: RATES.chair },
+        { label: 'Tables', qty: +e.tables, rate: RATES.table },
+        { label: 'Microphones', qty: +e.mics, rate: RATES.mic },
+        { label: 'Screens', qty: +e.screens, rate: RATES.screen },
+        { label: 'Projector', qty: +e.projectors, rate: RATES.projector },
+        { label: 'Stage', qty: +e.stage, rate: RATES.stage },
+        e.catering ? { label: 'Catering / F&B', qty: 1, rate: RATES.catering } : null
+    ].filter(Boolean).filter(l => l.qty > 0);
+}
+
+window.openBill = function(idx) {
+    var events = JSON.parse(localStorage.getItem('pyramid-events') || '[]');
+    var e = events[idx], lines = calcBill(e);
+    var total = lines.reduce((s, l) => s + l.qty * l.rate, 0);
+    document.getElementById('bill-title').textContent = e.title;
+    document.getElementById('bill-date').textContent = (e.date || '—') + ' · ' + (e.venue || '—');
+    document.getElementById('bill-lines').innerHTML = lines.map(l =>
+        '<div class="flex justify-between text-slate-300"><span>' + l.label + (l.qty > 1 ? ' <span class="text-slate-500">×' + l.qty + '</span>' : '') + '</span><span class="font-mono">$' + (l.qty * l.rate).toLocaleString() + '</span></div>'
+    ).join('');
+    document.getElementById('bill-total').textContent = '$' + total.toLocaleString();
+    document.getElementById('bill-modal').classList.remove('hidden');
+    if (window.lucide) lucide.createIcons();
+};
+
+window.closeBill = function(e) { if (e.target.id === 'bill-modal') document.getElementById('bill-modal').classList.add('hidden'); };
+
+function venueColor(v) {
+    if (!v) return 'bg-slate-500';
+    v = v.toLowerCase();
+    if (v.includes('blue')) return 'bg-cyan-500';
+    if (v.includes('orange')) return 'bg-orange-500';
+    if (v.includes('green')) return 'bg-emerald-500';
+    if (v.includes('yellow')) return 'bg-yellow-500';
+    return 'bg-indigo-500';
+}
+
+function renderArchive() {
+    var events = JSON.parse(localStorage.getItem('pyramid-events') || '[]');
+    var list = document.getElementById('archive-list');
+    var empty = document.getElementById('archive-empty');
+    if (!list) return;
+    if (!events.length) { if (empty) empty.classList.remove('hidden'); return; }
+    if (empty) empty.classList.add('hidden');
+    list.innerHTML = events.map(function(e, i) {
+        var lines = calcBill(e);
+        var total = lines.reduce((s, l) => s + l.qty * l.rate, 0);
+        var statusMap = { 'Approved': 'badge-success', 'Under Review': 'badge-warning', 'Completed': 'badge-info', 'Rejected': 'badge-danger' };
+        return '<div class="p-4 rounded-xl border border-slate-800 bg-slate-900 hover:border-cyan-500/40 transition flex flex-col md:flex-row md:items-center justify-between gap-3">' +
+            '<div class="flex items-center gap-3"><div class="w-2 h-10 rounded-full ' + venueColor(e.venue) + '"></div>' +
+            '<div><div class="font-semibold">' + (e.title || 'Untitled') + '</div>' +
+            '<div class="text-slate-500 text-xs flex flex-wrap items-center gap-3 mt-1">' +
+            '<span class="flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i>' + (e.venue || '—') + '</span>' +
+            '<span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3 h-3"></i>' + (e.date || '—') + '</span>' +
+            '<span class="flex items-center gap-1"><i data-lucide="users" class="w-3 h-3"></i>' + (e.size || '—') + '</span>' +
+            '<span class="flex items-center gap-1"><i data-lucide="building-2" class="w-3 h-3"></i>' + (e.org || '—') + '</span>' +
+            '</div></div></div>' +
+            '<div class="flex items-center gap-3">' +
+            '<span class="font-mono text-sm text-slate-300">$' + total.toLocaleString() + '</span>' +
+            '<span class="badge ' + (statusMap[e.status] || 'badge-info') + '">' + (e.status || 'Under Review') + '</span>' +
+            '<button onclick="openBill(' + i + ')" class="btn-secondary !py-1 !px-3 text-xs flex items-center gap-1"><i data-lucide="receipt" class="w-3 h-3"></i>Bill</button>' +
+            '</div></div>';
+    }).join('');
+    if (window.lucide) lucide.createIcons();
+}
+
+/*
+=====================================================
+NOTIFICATIONS
+=====================================================
+*/
+function toggleNotifMenu(e) { e.stopPropagation(); document.getElementById('notif-menu').classList.toggle('hidden'); }
+function closeNotifMenu() { var m = document.getElementById('notif-menu'); if (m) m.classList.add('hidden'); }
+document.addEventListener('click', closeNotifMenu);
+window.toggleNotifMenu = toggleNotifMenu; window.closeNotifMenu = closeNotifMenu;
 
 /*
 =====================================================
@@ -206,61 +309,73 @@ DOCUMENTS & QUOTATIONS PAGE
 
 function initializeDocumentsPage() {
     var events = {
-        'EVT-094': { name: 'Startup Albania Summit', venue: 'Orange Hall', status: 'Under Review', color:'bg-orange-500',
-            docs: { proposal: true, quote: true, contract: false } },
-        'EVT-088': { name: 'Design Week Tirana', venue: 'Blue Hall', status: 'Approved', color:'bg-cyan-500',
-            docs: { proposal: true, quote: true, contract: true } },
-        'EVT-071': { name: 'Tech Meetup', venue: 'Green Hub', status: 'Completed', color:'bg-emerald-500',
-            docs: { proposal: true, quote: true, contract: true } }
+        'EVT-094': {
+            name: 'Startup Albania Summit', venue: 'Orange Hall', status: 'Under Review', color: 'bg-orange-500',
+            docs: { proposal: true, quote: true, contract: false }
+        },
+        'EVT-088': {
+            name: 'Design Week Tirana', venue: 'Blue Hall', status: 'Approved', color: 'bg-cyan-500',
+            docs: { proposal: true, quote: true, contract: true }
+        },
+        'EVT-071': {
+            name: 'Tech Meetup', venue: 'Green Hub', status: 'Completed', color: 'bg-emerald-500',
+            docs: { proposal: true, quote: true, contract: true }
+        }
     };
-    var statusBadge = { 'Under Review':'badge-warning', 'Approved':'badge-success', 'Completed':'badge-info' };
-    var docMeta = { proposal:['file-text','Proposal.pdf'], quote:['receipt','Quote.pdf'], contract:['file-check','Contract.pdf'] };
+    var statusBadge = { 'Under Review': 'badge-warning', 'Approved': 'badge-success', 'Completed': 'badge-info' };
+    var docMeta = { proposal: ['file-text', 'Proposal.pdf'], quote: ['receipt', 'Quote.pdf'], contract: ['file-check', 'Contract.pdf'] };
     var wrap = document.getElementById('doc-events');
-    function render(q){
-        var ids = Object.keys(events).filter(function(id){
-            return !q || events[id].name.toLowerCase().indexOf(q)>-1 || events[id].venue.toLowerCase().indexOf(q)>-1;
+    function render(q) {
+        var ids = Object.keys(events).filter(function (id) {
+            return !q || events[id].name.toLowerCase().indexOf(q) > -1 || events[id].venue.toLowerCase().indexOf(q) > -1;
         });
-        wrap.innerHTML = ids.length ? ids.map(function(id){
+        wrap.innerHTML = ids.length ? ids.map(function (id) {
             var ev = events[id];
-            var cards = Object.keys(docMeta).map(function(k){
+            var cards = Object.keys(docMeta).map(function (k) {
                 var ready = ev.docs[k], m = docMeta[k];
-                return '<div class="p-4 rounded-xl border bg-slate-900'+(ready?' border-slate-800 cursor-pointer hover:border-cyan-500/50 hover:-translate-y-0.5 transition':' border-slate-800/50 opacity-40')+'"'+
-                    (ready?' onclick="showDoc(\''+id+'\',\''+k+'\')"':'')+'>'+
-                    '<div class="flex items-center gap-2 mb-2"><div class="p-1.5 rounded-lg '+(ready?'bg-cyan-500/10 text-cyan-400':'bg-slate-800 text-slate-500')+'"><i data-lucide="'+m[0]+'" class="w-4 h-4"></i></div><span class="font-medium text-sm">'+m[1]+'</span></div>'+
-                    '<p class="text-xs '+(ready?'text-emerald-400':'text-slate-500')+'">'+(ready?'Ready to download':'Awaiting approval')+'</p></div>';
+                return '<div class="p-4 rounded-xl border bg-slate-900' + (ready ? ' border-slate-800 cursor-pointer hover:border-cyan-500/50 hover:-translate-y-0.5 transition' : ' border-slate-800/50 opacity-40') + '"' +
+                    (ready ? ' onclick="showDoc(\'' + id + '\',\'' + k + '\')"' : '') + '>' +
+                    '<div class="flex items-center gap-2 mb-2"><div class="p-1.5 rounded-lg ' + (ready ? 'bg-cyan-500/10 text-cyan-400' : 'bg-slate-800 text-slate-500') + '"><i data-lucide="' + m[0] + '" class="w-4 h-4"></i></div><span class="font-medium text-sm">' + m[1] + '</span></div>' +
+                    '<p class="text-xs ' + (ready ? 'text-emerald-400' : 'text-slate-500') + '">' + (ready ? 'Ready to download' : 'Awaiting approval') + '</p></div>';
             }).join('');
-            return '<div class="card overflow-hidden">'+
-                '<div class="flex items-center gap-3 mb-4"><div class="w-2 h-10 rounded-full '+ev.color+'"></div>'+
-                '<div class="flex-1"><h3 class="font-bold">'+ev.name+'</h3><p class="text-slate-500 text-xs">'+ev.venue+'</p></div>'+
-                '<span class="badge '+statusBadge[ev.status]+'">'+ev.status+'</span></div>'+
-                '<div class="grid md:grid-cols-3 gap-3">'+cards+'</div></div>';
+            return '<div class="card overflow-hidden">' +
+                '<div class="flex items-center gap-3 mb-4"><div class="w-2 h-10 rounded-full ' + ev.color + '"></div>' +
+                '<div class="flex-1"><h3 class="font-bold">' + ev.name + '</h3><p class="text-slate-500 text-xs">' + ev.venue + '</p></div>' +
+                '<span class="badge ' + statusBadge[ev.status] + '">' + ev.status + '</span></div>' +
+                '<div class="grid md:grid-cols-3 gap-3">' + cards + '</div></div>';
         }).join('') : '<div class="card text-center text-slate-500 text-sm py-8">No events match your search.</div>';
         if (window.lucide) lucide.createIcons();
     }
-    window.docFilter = function(v){ render(v.toLowerCase()); };
+    window.docFilter = function (v) { render(v.toLowerCase()); };
     render('');
 
     var docData = {
-        proposal: { title: "Event Proposal", body:
-            "<p><b>Equipment:</b> see event details</p>"+
-            '<p class="text-amber-600 mt-2"><b>⚠ Conflict:</b> Projector #3 overlaps another booking — pending resolution</p>' },
-        quote: { title: "Quotation", body:
-            '<table class="w-full text-sm mt-2"><tr class="border-b"><td class="py-1">Venue (9 hrs)</td><td class="text-right">$1,350</td></tr>'+
-            '<tr class="border-b"><td class="py-1">Equipment package</td><td class="text-right">$650</td></tr>'+
-            '<tr class="font-bold"><td class="py-2">Total</td><td class="text-right">$2,450</td></tr></table>' },
-        contract: { title: "Service Contract", body:
-            "<p>This agreement confirms the booking, equipment, and terms per Pyramid Backstage policy.</p>"+
-            '<div class="mt-6 flex justify-between text-sm"><span>Organizer signature: ___________</span><span>Pyramid rep: ___________</span></div>' }
+        proposal: {
+            title: "Event Proposal", body:
+                "<p><b>Equipment:</b> see event details</p>" +
+                '<p class="text-amber-600 mt-2"><b>⚠ Conflict:</b> Projector #3 overlaps another booking — pending resolution</p>'
+        },
+        quote: {
+            title: "Quotation", body:
+                '<table class="w-full text-sm mt-2"><tr class="border-b"><td class="py-1">Venue (9 hrs)</td><td class="text-right">$1,350</td></tr>' +
+                '<tr class="border-b"><td class="py-1">Equipment package</td><td class="text-right">$650</td></tr>' +
+                '<tr class="font-bold"><td class="py-2">Total</td><td class="text-right">$2,450</td></tr></table>'
+        },
+        contract: {
+            title: "Service Contract", body:
+                "<p>This agreement confirms the booking, equipment, and terms per Pyramid Backstage policy.</p>" +
+                '<div class="mt-6 flex justify-between text-sm"><span>Organizer signature: ___________</span><span>Pyramid rep: ___________</span></div>'
+        }
     };
-    window.showDoc = function(eventId, type) {
+    window.showDoc = function (eventId, type) {
         var ev = events[eventId], d = docData[type];
         document.getElementById("doc-content").innerHTML =
-            '<button onclick="closeDoc()" class="absolute top-3 right-3 text-slate-400 hover:text-slate-900">✕</button>'+
-            '<h2 class="text-xl font-bold">'+d.title+'</h2><p class="text-xs text-slate-500 mb-4">'+eventId+' — '+ev.name+'</p>'+d.body+
+            '<button onclick="closeDoc()" class="absolute top-3 right-3 text-slate-400 hover:text-slate-900">✕</button>' +
+            '<h2 class="text-xl font-bold">' + d.title + '</h2><p class="text-xs text-slate-500 mb-4">' + eventId + ' — ' + ev.name + '</p>' + d.body +
             '<button onclick="window.print()" class="btn-primary mt-6 !text-slate-900" style="background:#06b6d4">Download as PDF</button>';
         document.getElementById("doc-modal").classList.remove("hidden");
     };
-    window.closeDoc = function() {
+    window.closeDoc = function () {
         document.getElementById("doc-modal").classList.add("hidden");
     };
 }
@@ -382,10 +497,27 @@ ADMIN PAGE
 */
 
 function initializeAdminPage() {
-
-    console.log(
-        "Admin command center initialized."
-    );
+    var ctx = document.getElementById('revenueChart');
+    if (!ctx) return;
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['W1', 'W2', 'W3', 'W4'],
+            datasets: [{
+                data: [7200, 8800, 9100, 9790],
+                borderColor: '#22d3ee',
+                backgroundColor: 'rgba(34,211,238,0.1)',
+                fill: true, tension: 0.35, pointRadius: 0
+            }]
+        },
+        options: {
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { grid: { display: false }, ticks: { color: '#94a3b8' } },
+                y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+            }
+        }
+    });
 }
 
 /*
