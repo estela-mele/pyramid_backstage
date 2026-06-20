@@ -1,0 +1,51 @@
+<section class="max-w-md mx-auto space-y-6 fade-in">
+
+    <div class="text-center">
+        <h2 class="text-2xl font-bold">Sign Up</h2>
+        <p class="text-slate-400 text-sm">Create your Pyramid Backstage account</p>
+    </div>
+
+    <div class="card space-y-4">
+        <form id="sign-up-form" class="space-y-4">
+            <div>
+                <label class="form-label">Full name</label>
+                <input type="text" id="signup-name" class="input-field" required>
+            </div>
+
+            <div>
+                <label class="form-label">Email</label>
+                <input type="email" id="signup-email" class="input-field" required>
+            </div>
+
+            <div>
+                <label class="form-label">Phone</label>
+                <input type="tel" id="signup-phone" class="input-field">
+            </div>
+
+            <div>
+                <label class="form-label">Organization (optional)</label>
+                <input type="text" id="signup-org" class="input-field">
+            </div>
+
+            <div>
+                <label class="form-label">Password</label>
+                <input type="password" id="signup-password" class="input-field" required>
+            </div>
+
+            <button type="submit" class="btn-primary w-full">Sign Up</button>
+        </form>
+
+        <div class="text-sm text-slate-400">
+            Already have an account? <a href="#" onclick="navigateTo('signin')">Sign in</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('sign-up-form')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (window.showToast) window.showToast('Account created (demo)', 'success');
+            if (window.navigateTo) window.navigateTo('workspace');
+        });
+    </script>
+
+</section>

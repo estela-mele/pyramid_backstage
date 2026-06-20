@@ -1,0 +1,27 @@
+<section class="space-y-6 fade-in">
+    <div class="flex items-center justify-between">
+        <div><h2 class="text-3xl font-bold">Reports</h2><p class="text-slate-400 text-sm">Audit trail and platform-wide event overview.</p></div>
+        <button class="btn-secondary" onclick="navigateTo('admin')">Back to Dashboard</button>
+    </div>
+    <div class="card space-y-3">
+        <h3 class="card-title">System Audit Logs</h3>
+        <div class="space-y-3 text-xs text-slate-400 font-mono border-l border-slate-800 pl-4">
+            <div><span class="text-slate-500">14:12:03</span> AI Copilot updated EVT-2026-094</div>
+            <div><span class="text-slate-500">14:02:11</span> Conflict detected: Projector #3 overlap</div>
+            <div><span class="text-slate-500">13:45:22</span> New event request submitted</div>
+        </div>
+    </div>
+    <div class="card">
+        <h3 class="card-title">Global Event Overview</h3>
+        <div class="table-wrapper">
+            <table class="table">
+                <thead><tr><th>Event</th><th>Venue</th><th>Status</th><th>Revenue</th></tr></thead>
+                <tbody>
+                    <tr><td>Startup Albania Summit</td><td>Orange Hall</td><td class="text-amber-400">Under Review</td><td>$2,450</td></tr>
+                    <tr><td>Design Week Tirana</td><td>Blue Hall</td><td class="text-emerald-400">Approved</td><td>$4,800</td></tr>
+                    <tr><td>Tech Meetup</td><td>Green Hub</td><td class="text-cyan-400">Completed</td><td>$1,200</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

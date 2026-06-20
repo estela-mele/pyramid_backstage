@@ -1,0 +1,94 @@
+<section class="space-y-8 fade-in">
+  <div class="flex items-center justify-between">
+    <div>
+      <h2 class="text-3xl font-bold">Events Archive</h2>
+      <p class="text-slate-400">Full history of your submitted and completed events.</p>
+    </div>
+    <button class="btn-secondary" onclick="navigateTo('organizer')">Back to Dashboard</button>
+  </div>
+
+  <div class="card">
+   
+    <div id="organizer-events-table" class="space-y-3">
+      <div
+        class="p-4 rounded-xl border border-slate-800 bg-slate-900 hover:border-cyan-500/40 transition flex flex-col md:flex-row md:items-center justify-between gap-3"
+      >
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-10 rounded-full bg-orange-500"></div>
+          <div>
+            <div class="font-medium">Startup Albania Summit</div>
+            <div class="text-slate-500 text-xs flex items-center gap-3 mt-1">
+              <span class="flex items-center gap-1"
+                ><i data-lucide="map-pin" class="w-3 h-3"></i>Orange Hall</span
+              >
+              <span class="flex items-center gap-1"
+                ><i data-lucide="calendar" class="w-3 h-3"></i>Jul 12,
+                2026</span
+              >
+              <span class="flex items-center gap-1"
+                ><i data-lucide="users" class="w-3 h-3"></i>180</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="font-mono text-sm text-slate-300">$2,450</span>
+          <span class="badge badge-warning">Under Review</span>
+        </div>
+      </div>
+
+      <div
+        class="p-4 rounded-xl border border-slate-800 bg-slate-900 hover:border-cyan-500/40 transition flex flex-col md:flex-row md:items-center justify-between gap-3"
+      >
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-10 rounded-full bg-cyan-500"></div>
+          <div>
+            <div class="font-medium">Design Week Tirana</div>
+            <div class="text-slate-500 text-xs flex items-center gap-3 mt-1">
+              <span class="flex items-center gap-1"
+                ><i data-lucide="map-pin" class="w-3 h-3"></i>Blue Hall</span
+              >
+              <span class="flex items-center gap-1"
+                ><i data-lucide="calendar" class="w-3 h-3"></i>Jun 28,
+                2026</span
+              >
+              <span class="flex items-center gap-1"
+                ><i data-lucide="users" class="w-3 h-3"></i>250</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="font-mono text-sm text-slate-300">$4,800</span>
+          <span class="badge badge-success">Approved</span>
+        </div>
+      </div>
+
+      <div
+        class="p-4 rounded-xl border border-slate-800 bg-slate-900 hover:border-cyan-500/40 transition flex flex-col md:flex-row md:items-center justify-between gap-3"
+      >
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-10 rounded-full bg-emerald-500"></div>
+          <div>
+            <div class="font-medium">Tech Meetup</div>
+            <div class="text-slate-500 text-xs flex items-center gap-3 mt-1">
+              <span class="flex items-center gap-1"
+                ><i data-lucide="map-pin" class="w-3 h-3"></i>Green Hub</span
+              >
+              <span class="flex items-center gap-1"
+                ><i data-lucide="calendar" class="w-3 h-3"></i>Jun 5, 2026</span
+              >
+              <span class="flex items-center gap-1"
+                ><i data-lucide="users" class="w-3 h-3"></i>120</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="font-mono text-sm text-slate-300">$1,200</span>
+          <span class="badge badge-info">Completed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

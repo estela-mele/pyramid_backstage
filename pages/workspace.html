@@ -1,0 +1,243 @@
+<section class="space-y-8 fade-in">
+
+    <!-- HEADER -->
+    <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+
+        <div>
+            <h2 class="text-3xl font-bold">
+                Event Workspace
+            </h2>
+
+            <p class="text-slate-400">
+                End-to-end operational control for a single event lifecycle.
+            </p>
+        </div>
+
+        <div class="flex gap-2">
+
+            <button class="btn-secondary">
+                Export Plan
+            </button>
+
+            <button class="btn-primary">
+                Approve Event
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- EVENT SUMMARY -->
+    <div class="grid lg:grid-cols-4 gap-4">
+
+        <div class="card space-y-2">
+
+            <h3 class="card-title">
+                Event Info
+            </h3>
+
+            <p><strong>Name:</strong> Startup Albania Summit</p>
+            <p><strong>ID:</strong> #EVT-2026-094</p>
+            <p><strong>Status:</strong> <span class="text-amber-400">Under Review</span></p>
+
+        </div>
+
+        <div class="card space-y-2">
+
+            <h3 class="card-title">
+                Venue
+            </h3>
+
+            <p><strong>Primary:</strong> Orange Hall</p>
+            <p><strong>Overflow:</strong> Corridor East Wing</p>
+            <p><strong>Capacity:</strong> 180</p>
+
+        </div>
+
+        <div class="card space-y-2">
+
+            <h3 class="card-title">
+                Timeline
+            </h3>
+
+            <p><strong>Date:</strong> 12 July 2026</p>
+            <p><strong>Setup:</strong> 08:00</p>
+            <p><strong>Start:</strong> 10:00</p>
+            <p><strong>End:</strong> 18:00</p>
+
+        </div>
+
+        <div class="card space-y-2">
+
+            <h3 class="card-title">
+                Risk Status
+            </h3>
+
+            <p class="text-amber-400 font-semibold">
+                ⚠ Medium Risk
+            </p>
+
+            <p class="text-slate-400 text-sm">
+                1 asset conflict detected
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- AI DECISION LAYER -->
+    <div class="card">
+
+        <div class="flex items-center gap-2 mb-4">
+
+            <i data-lucide="bot" class="text-cyan-400"></i>
+
+            <h3 class="card-title text-cyan-400">
+                AI Decision Layer
+            </h3>
+
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-6">
+
+            <div class="space-y-3">
+
+                <div class="badge badge-success">
+                    Optimal Allocation Found
+                </div>
+
+                <p class="text-sm text-slate-300">
+                    Orange Hall is the best fit based on capacity,
+                    equipment availability, and scheduling constraints.
+                </p>
+
+                <div class="text-sm space-y-1 text-slate-400">
+
+                    <p>✔ 180 chairs available</p>
+                    <p>✔ 12 tables reserved successfully</p>
+                    <p>✔ AV setup compatible</p>
+
+                </div>
+
+            </div>
+
+            <div class="space-y-3">
+
+                <div class="badge badge-warning">
+                    Conflict Detected
+                </div>
+
+                <p class="text-sm text-slate-300">
+                    Projector #3 is double-booked with another event in Green Hub.
+                </p>
+
+                <button class="btn-primary w-full">
+                    Auto-Resolve Conflict
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- OPERATIONS -->
+    <div class="grid lg:grid-cols-3 gap-6">
+
+        <!-- ASSETS -->
+        <div class="card space-y-3">
+
+            <h3 class="card-title">
+                Asset Allocation
+            </h3>
+
+            <div class="space-y-2 text-sm font-mono">
+
+                <div class="flex justify-between">
+                    <span>Chairs</span>
+                    <span class="text-emerald-400">180 / 600</span>
+                </div>
+
+                <div class="flex justify-between">
+                    <span>Tables</span>
+                    <span class="text-emerald-400">12 / 120</span>
+                </div>
+
+                <div class="flex justify-between">
+                    <span>Projectors</span>
+                    <span class="text-amber-400">1 Conflict</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- TASKS -->
+        <div class="card space-y-3">
+
+            <h3 class="card-title">
+                Execution Playbook
+            </h3>
+
+            <label class="flex items-center gap-2 text-sm">
+                <input type="checkbox" checked>
+                Stage setup completed
+            </label>
+
+            <label class="flex items-center gap-2 text-sm">
+                <input type="checkbox">
+                AV system configuration
+            </label>
+
+            <label class="flex items-center gap-2 text-sm">
+                <input type="checkbox">
+                Registration desk setup
+            </label>
+
+            <label class="flex items-center gap-2 text-sm">
+                <input type="checkbox">
+                Final walkthrough
+            </label>
+
+        </div>
+
+        <!-- TEAM -->
+        <div class="card space-y-3">
+
+            <h3 class="card-title">
+                Assigned Teams
+            </h3>
+
+            <div class="flex flex-wrap gap-2">
+
+                <span class="badge badge-info">Logistics</span>
+                <span class="badge badge-info">AV Crew</span>
+                <span class="badge badge-warning">Security</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="card">
+
+        <h3 class="card-title">
+            Live Event Timeline
+        </h3>
+
+        <div class="grid grid-cols-2 md:grid-cols-6 gap-3 text-center">
+
+            <div class="timeline-step completed">Request</div>
+            <div class="timeline-step completed">Planning</div>
+            <div class="timeline-step active">Setup</div>
+            <div class="timeline-step">Live</div>
+            <div class="timeline-step">Teardown</div>
+            <div class="timeline-step">Closed</div>
+
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,67 @@
+<section class="space-y-8 fade-in">
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    <div>
+      <h2 class="text-3xl font-bold">Organizer Dashboard</h2>
+      <p class="text-slate-400">Submit requests, review proposals and track event progress.</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <div class="relative">
+        <i data-lucide="bell" class="text-slate-400"></i>
+        <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+      </div>
+      <div class="text-right">
+        <div class="font-medium text-sm flex items-center gap-1.5 justify-end">Enterprise Tech Group <span class="badge badge-success !text-[10px] !py-0">Loyal Client</span></div>
+        <div class="text-slate-500 text-xs">Arben Krasniqi · arben@enterprisetech.al · +355 69 123 4567</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-3">
+    <div class="p-3 rounded-xl border border-amber-500/30 bg-amber-500/10 text-amber-400 text-sm flex items-center gap-2 cursor-pointer" onclick="loadPage('documents')">
+      <i data-lucide="file-check" class="w-4 h-4"></i>Quote.pdf ready for Startup Albania Summit
+    </div>
+    <div class="p-3 rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-sm flex items-center gap-2 cursor-pointer" onclick="loadPage('track-tickets')">
+      <i data-lucide="message-circle" class="w-4 h-4"></i>Admin replied on TKT-1038
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-4 gap-4">
+    <div class="kpi-card"><div class="kpi-label">Active Requests</div><div class="kpi-value text-cyan-400">3</div></div>
+    <div class="kpi-card"><div class="kpi-label">Approved Events</div><div class="kpi-value text-emerald-400">8</div></div>
+    <div class="kpi-card"><div class="kpi-label">Pending Reviews</div><div class="kpi-value text-amber-400">2</div></div>
+    <div class="kpi-card"><div class="kpi-label">Documents</div><div class="kpi-value text-indigo-400">14</div></div>
+  </div>
+
+  <div class="card">
+    <div class="flex justify-between items-center mb-1">
+      <h3 class="card-title mb-0">Event Lifecycle Tracking</h3>
+      <span class="text-slate-500 text-xs">Startup Albania Summit · Orange Hall</span>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-6 gap-3 mt-3" id="lifecycle-steps">
+      <div class="timeline-step completed" data-idx="0" onclick="setStage(0)">Intake</div>
+      <div class="timeline-step completed" data-idx="1" onclick="setStage(1)">Proposal</div>
+      <div class="timeline-step active" data-idx="2" onclick="setStage(2)">Review</div>
+      <div class="timeline-step" data-idx="3" onclick="setStage(3)">Approved</div>
+      <div class="timeline-step" data-idx="4" onclick="setStage(4)">Setup</div>
+      <div class="timeline-step" data-idx="5" onclick="setStage(5)">Completed</div>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-4">
+    <button onclick="loadPage('create-event')" class="card text-left hover:border-cyan-500/40 transition">
+      <i data-lucide="calendar-plus" class="text-cyan-400 mb-2"></i>
+      <h3 class="card-title mb-1">Create New Event</h3>
+      <p class="card-subtitle">Submit a request and get an instant AI feasibility check.</p>
+    </button>
+    <button onclick="loadPage('documents')" class="card text-left hover:border-cyan-500/40 transition">
+      <i data-lucide="file-text" class="text-emerald-400 mb-2"></i>
+      <h3 class="card-title mb-1">Documents & Quotations</h3>
+      <p class="card-subtitle">View proposals, quotes and contracts.</p>
+    </button>
+    <button onclick="loadPage('events-archive')" class="card text-left hover:border-cyan-500/40 transition">
+      <i data-lucide="archive" class="text-indigo-400 mb-2"></i>
+      <h3 class="card-title mb-1">Events Archive</h3>
+      <p class="card-subtitle">Browse your full event history.</p>
+    </button>
+  </div>
+</section>

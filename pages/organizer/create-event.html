@@ -1,0 +1,331 @@
+<section class="space-y-8 fade-in">
+  <div class="flex items-center justify-between">
+    <div>
+      <h2 class="text-3xl font-bold">Create New Event</h2>
+      <p class="text-slate-400">Submit a request and get an instant AI feasibility check.</p>
+    </div>
+    <button class="btn-secondary" onclick="navigateTo('organizer')">Back to Dashboard</button>
+  </div>
+
+  <!-- FORM + AI -->
+  <div class="grid lg:grid-cols-3 gap-8">
+    <!-- REQUEST FORM -->
+    <div class="lg:col-span-2 card">
+      <h3 class="card-title flex items-center gap-2">
+        <i data-lucide="calendar-plus"></i>Create Event Request
+      </h3>
+
+      <form id="event-request-form" class="space-y-6">
+        <!-- WHO'S ASKING -->
+        <div>
+          <div
+            class="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-wider text-cyan-400"
+          >
+            <i data-lucide="user" class="w-4 h-4"></i>Who's asking
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="form-label">Name</label
+              ><input id="req-name" class="input-field" required />
+            </div>
+            <div>
+              <label class="form-label">Organization</label
+              ><input
+                id="req-org"
+                class="input-field"
+                value="Enterprise Tech Group"
+              />
+            </div>
+            <div>
+              <label class="form-label">Email</label
+              ><input
+                type="email"
+                id="req-email"
+                class="input-field"
+                required
+              />
+            </div>
+            <div>
+              <label class="form-label">Phone</label
+              ><input type="tel" id="req-phone" class="input-field" />
+            </div>
+          </div>
+        </div>
+
+        <!-- WHAT IT IS -->
+        <div class="pt-5 border-t border-slate-800">
+          <div
+            class="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-wider text-emerald-400"
+          >
+            <i data-lucide="sparkles" class="w-4 h-4"></i>What it is
+          </div>
+          <div class="grid md:grid-cols-3 gap-4 mb-4">
+            <select id="req-type" class="select-field md:col-span-1">
+              <option>Conference</option>
+              <option>Exhibition</option>
+              <option>Hackathon</option>
+              <option>Workshop</option>
+              <option>Performance</option>
+              <option>Private</option>
+              <option>Other</option>
+            </select>
+            <input
+              id="req-title"
+              class="input-field md:col-span-2"
+              placeholder="Event title"
+              value="Startup Albania Summit"
+              required
+            />
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <textarea
+              rows="2"
+              class="textarea-field"
+              placeholder="Short description"
+            >
+Stage setup, microphones, registration desk, projector and networking area.</textarea
+            >
+            <div>
+              <label class="form-label">Expected headcount</label
+              ><input
+                type="number"
+                id="req-size"
+                class="input-field"
+                value="180"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- WHEN -->
+        <div class="pt-5 border-t border-slate-800">
+          <div
+            class="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-wider text-amber-400"
+          >
+            <i data-lucide="clock" class="w-4 h-4"></i>When
+          </div>
+          <div class="grid md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="form-label">Preferred date</label
+              ><input type="date" class="input-field" value="2026-07-12" />
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="form-label">Start</label
+                ><input type="time" class="input-field" value="09:00" />
+              </div>
+              <div>
+                <label class="form-label">End</label
+                ><input type="time" class="input-field" value="18:00" />
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="form-label">Setup time before (hrs)</label
+              ><input type="number" class="input-field" value="2" />
+            </div>
+            <div>
+              <label class="form-label">Teardown time after (hrs)</label
+              ><input type="number" class="input-field" value="1" />
+            </div>
+          </div>
+        </div>
+
+        <!-- WHERE -->
+        <div class="pt-5 border-t border-slate-800">
+          <div
+            class="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-wider text-indigo-400"
+          >
+            <i data-lucide="map-pin" class="w-4 h-4"></i>Where
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <select id="req-venue" class="select-field">
+              <option>No preference (let AI match)</option>
+              <option>Blue Hall</option>
+              <option>Orange Hall</option>
+              <option>Green Hub</option>
+              <option>Yellow Studio</option>
+            </select>
+            <select id="req-layout" class="select-field">
+              <option>Theater</option>
+              <option>Classroom</option>
+              <option>Banquet</option>
+              <option>Standing</option>
+              <option>Custom</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- WHAT'S NEEDED -->
+        <div class="pt-5 border-t border-slate-800">
+          <div
+            class="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-wider text-rose-400"
+          >
+            <i data-lucide="package" class="w-4 h-4"></i>What's needed
+          </div>
+
+          <div class="grid grid-cols-3 md:grid-cols-4 gap-2 mb-4">
+            <!-- eslint-disable -->
+            <!-- equipment qty mini-cards -->
+            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+              <label class="text-xs text-slate-400">Chairs</label
+              ><input
+                type="number"
+                class="input-field !py-1 !text-sm"
+                value="180"
+              />
+            </div>
+            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+              <label class="text-xs text-slate-400">Tables</label
+              ><input
+                type="number"
+                class="input-field !py-1 !text-sm"
+                value="12"
+              />
+            </div>
+            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+              <label class="text-xs text-slate-400">Mics</label
+              ><input
+                type="number"
+                class="input-field !py-1 !text-sm"
+                value="4"
+              />
+            </div>
+            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+              <label class="text-xs text-slate-400">Screens</label
+              ><input
+                type="number"
+                class="input-field !py-1 !text-sm"
+                value="1"
+              />
+            </div>
+            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+              <label class="text-xs text-slate-400">Projector</label
+              ><input
+                type="number"
+                class="input-field !py-1 !text-sm"
+                value="1"
+              />
+            </div>
+            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+              <label class="text-xs text-slate-400">Stage</label
+              ><input
+                type="number"
+                class="input-field !py-1 !text-sm"
+                value="1"
+              />
+            </div>
+            <div
+              class="p-2 rounded-lg bg-slate-900 border border-slate-800 col-span-2"
+            >
+              <label class="text-xs text-slate-400">Other (specify)</label
+              ><input
+                class="input-field !py-1 !text-sm"
+                placeholder="e.g. lighting rig"
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-4 items-center">
+            <label class="flex items-center gap-2 text-sm text-slate-300">
+              <input
+                type="checkbox"
+                id="req-catering"
+                class="accent-cyan-500 w-4 h-4"
+              />Catering / F&B needed</label
+            >
+            <label class="flex items-center gap-2 text-sm text-slate-300">
+              <input
+                type="checkbox"
+                class="accent-cyan-500 w-4 h-4"
+              />Accessibility</label
+            >
+            <label class="flex items-center gap-2 text-sm text-slate-300">
+              <input type="checkbox" class="accent-cyan-500 w-4 h-4" />Extra
+              power</label
+            >
+            <label class="flex items-center gap-2 text-sm text-slate-300">
+              <input type="checkbox" class="accent-cyan-500 w-4 h-4" />Complex
+              AV</label
+            >
+            <label class="flex items-center gap-2 text-sm text-slate-300">
+              <input type="checkbox" class="accent-cyan-500 w-4 h-4" />Branding
+              / signage</label
+            >
+          </div>
+        </div>
+
+        <!-- COMMERCIAL -->
+        <div class="pt-5 border-t border-slate-800">
+          <div
+            class="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-wider text-violet-400"
+          >
+            <i data-lucide="circle-dollar-sign" class="w-4 h-4"></i>Commercial
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <select class="select-field">
+              <option>No budget set</option>
+              <option>Under $1,000</option>
+              <option>$1,000–$2,500</option>
+              <option>$2,500–$5,000</option>
+              <option>$5,000+</option>
+            </select>
+            <label class="flex items-center gap-2 text-sm text-slate-300">
+              <input type="checkbox" class="accent-cyan-500 w-4 h-4" />Recurring
+              / repeat event</label
+            >
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary w-full mt-2">
+          Run AI Feasibility Analysis
+        </button>
+      </form>
+    </div>
+
+    <!-- AI PANEL -->
+    <div class="card">
+      <div class="flex items-center gap-2 mb-4">
+        <i data-lucide="bot" class="text-cyan-400"></i>
+
+        <h3 class="font-bold text-cyan-400">Backstage AI Copilot</h3>
+      </div>
+
+      <div id="copilot-default-text" class="text-slate-500 text-sm">
+        Submit an event request to generate recommendations and resource
+        allocation.
+      </div>
+
+      <div id="copilot-results" class="hidden space-y-4">
+        <div class="badge badge-success">Optimal Match Found</div>
+
+        <div class="space-y-2 text-sm">
+          <p>
+            <strong>Venue:</strong>
+            Orange Hall
+          </p>
+
+          <p>
+            <strong>Capacity Fit:</strong>
+            180 attendees
+          </p>
+
+          <p>
+            <strong>Assets:</strong>
+            180 chairs, 12 tables, 4 microphones
+          </p>
+
+          <p>
+            <strong>Estimated Cost:</strong>
+            $2,450
+          </p>
+
+          <p class="text-amber-400">⚠ Projector #3 conflict detected</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

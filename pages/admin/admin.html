@@ -1,0 +1,41 @@
+<section class="space-y-8 fade-in">
+    <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div>
+            <h2 class="text-3xl font-bold">System Administration Command Center</h2>
+            <p class="text-slate-400">Manage global configuration, pricing, users, and system integrity.</p>
+        </div>
+        <div class="badge badge-warning">Admin Access</div>
+    </div>
+
+    <div class="grid md:grid-cols-4 gap-4">
+        <div class="kpi-card"><div class="kpi-label">Venue Utilization</div><div class="kpi-value text-cyan-400">84.2%</div></div>
+        <div class="kpi-card"><div class="kpi-label">Revenue (30d)</div><div class="kpi-value text-emerald-400">$34,890</div></div>
+        <div class="kpi-card"><div class="kpi-label">Active Events</div><div class="kpi-value text-indigo-400">12</div></div>
+        <div class="kpi-card"><div class="kpi-label">System Alerts</div><div class="kpi-value text-amber-400">1</div></div>
+    </div>
+
+    <div class="card space-y-3">
+        <h3 class="card-title">Approval Queue</h3>
+        <div class="flex justify-between items-center p-3 rounded-xl border border-slate-800 bg-slate-900">
+            <div><div class="font-medium text-sm">Startup Albania Summit</div><div class="text-slate-500 text-xs">Discounted quote — Orange Hall</div></div>
+            <div class="flex gap-2"><button class="badge badge-success">Approve</button><button class="badge badge-danger">Reject</button></div>
+        </div>
+        <div class="flex justify-between items-center p-3 rounded-xl border border-slate-800 bg-slate-900">
+            <div><div class="font-medium text-sm">Design Week Tirana</div><div class="text-slate-500 text-xs">Projector #3 double-booking override</div></div>
+            <div class="flex gap-2"><button class="badge badge-success">Approve</button><button class="badge badge-danger">Reject</button></div>
+        </div>
+        <div class="flex justify-between items-center p-3 rounded-xl border border-slate-800 bg-slate-900">
+            <div><div class="font-medium text-sm">Private Wedding Reception</div><div class="text-slate-500 text-xs">Late request — under 48h notice</div></div>
+            <div class="flex gap-2"><button class="badge badge-success">Approve</button><button class="badge badge-danger">Reject</button></div>
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4">
+        <button onclick="loadPage('admin-staff')" class="card text-left hover:border-cyan-500/40 transition"><i data-lucide="users" class="text-cyan-400 mb-2"></i><h3 class="card-title mb-1">Staff Table</h3><p class="card-subtitle">View roster and shift status.</p></button>
+        <button onclick="loadPage('admin-organizers')" class="card text-left hover:border-cyan-500/40 transition"><i data-lucide="building-2" class="text-emerald-400 mb-2"></i><h3 class="card-title mb-1">Organizator Table</h3><p class="card-subtitle">Registered organizations.</p></button>
+        <button onclick="loadPage('admin-pricing')" class="card text-left hover:border-cyan-500/40 transition"><i data-lucide="circle-dollar-sign" class="text-indigo-400 mb-2"></i><h3 class="card-title mb-1">Pricing Management</h3><p class="card-subtitle">Space and asset rates.</p></button>
+        <button onclick="loadPage('calendar')" class="card text-left hover:border-cyan-500/40 transition"><i data-lucide="calendar" class="text-amber-400 mb-2"></i><h3 class="card-title mb-1">Events Calendar</h3><p class="card-subtitle">Weekly schedule across venues.</p></button>
+        <button onclick="loadPage('admin-assign')" class="card text-left hover:border-cyan-500/40 transition"><i data-lucide="user-check" class="text-rose-400 mb-2"></i><h3 class="card-title mb-1">Assign Events</h3><p class="card-subtitle">Match staff to event tasks.</p></button>
+        <button onclick="loadPage('admin-reports')" class="card text-left hover:border-cyan-500/40 transition"><i data-lucide="bar-chart-3" class="text-violet-400 mb-2"></i><h3 class="card-title mb-1">Reports</h3><p class="card-subtitle">Audit log and event overview.</p></button>
+    </div>
+</section>

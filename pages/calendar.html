@@ -1,0 +1,211 @@
+<section class="space-y-6 fade-in">
+  <div class="flex items-center justify-between">
+    <div>
+      <h2 class="text-3xl font-bold">Weekly Events Calendar</h2>
+      <p class="text-slate-400 text-sm">
+        View scheduled events across each day and hour of the week.
+      </p>
+    </div>
+    <button class="btn-secondary" onclick="navigateTo('public')">Back</button>
+  </div>
+
+  <div class="card overflow-auto">
+    <style>
+      .cal-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      .cal-nav button {
+        width: 32px;
+        height: 32px;
+        border-radius: 0.5rem;
+        border: 1px solid rgb(30 41 59);
+        color: rgb(226 232 240);
+        background: transparent;
+        cursor: pointer;
+      }
+      .cal-nav button:hover {
+        background: rgba(30, 41, 59, 0.6);
+      }
+      .cal-range {
+        font-weight: 800;
+        color: rgb(226 232 240);
+      }
+      .cal-hdr {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 2px;
+        margin-bottom: 2px;
+      }
+      .cal-hdr span {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgb(148 163 184);
+        text-align: center;
+        padding: 0.35rem 0;
+      }
+      .cal-hdr span b {
+        display: block;
+        font-size: 1rem;
+        color: rgb(226 232 240);
+        margin-top: 0.15rem;
+      }
+      .cal-hdr span.t,
+      .cal-hdr span.t b {
+        color: rgb(6 182 212);
+      }
+.cal-multi{background:rgba(249,115,22,.15);border-left:2px solid rgb(251 146 60)}
+.cal-multi .cal-en{color:rgb(251 146 60)}
+      .cal-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 2px;
+        min-width: 840px;
+      }
+      .cal-day {
+        padding: 0.4rem;
+        border-radius: 0.5rem;
+        min-height: 90px;
+        background: rgba(30, 41, 59, 0.25);
+      }
+      .cal-ev {
+        padding: 0.3rem 0.4rem;
+        border-radius: 0.4rem;
+        background: rgba(6, 182, 212, 0.08);
+        margin-bottom: 0.25rem;
+      }
+      .cal-et {
+        font-size: 0.6rem;
+        color: rgb(148 163 184);
+      }
+      .cal-en {
+        font-size: 0.7rem;
+        color: rgb(226 232 240);
+        font-weight: 600;
+        margin: 0.1rem 0;
+      }
+      .cal-empty {
+        font-size: 0.65rem;
+        color: rgb(71 85 105);
+      }
+      .cal-clash {
+        border-left: 2px solid rgb(251 146 60);
+      }
+      .cal-tag {
+        color: rgb(251 146 60);
+      }
+    </style>
+
+    <div class="cal-nav">
+      <button onclick="calNav(-1)">‹</button>
+      <span class="cal-range" id="cal-range"></span>
+      <button onclick="calNav(1)">›</button>
+      <input
+        id="cal-search"
+        type="text"
+        placeholder="Search events…"
+        class="input-field !w-48 !py-1.5 !text-xs"
+        oninput="calFilter(this.value)"
+      />
+    </div>
+
+    <div id="cal-hdr" class="cal-hdr min-w-[840px]"></div>
+    <div id="cg" class="cal-grid"></div>
+
+    <script>
+      (function () {
+        var events = [
+          { d: 0, t: "09:00", n: "Team Sync", v: "Blue Hall" },
+          { d: 1, t: "10:00", n: "Hackathon Briefing", v: "Yellow Studio" },
+          {
+            d: 2,
+            t: "09:00",
+            n: "Startup Albania Summit",
+            v: "Orange Hall",
+            span: 2,
+          },
+          { d: 4, t: "18:00", n: "Photography Exhibition", v: "Green Hub" },
+          { d: 5, t: "16:00", n: "Private Wedding Reception", v: "Blue Hall" },
+        ];
+        var wk = 0,
+          base = new Date(2026, 3, 6),
+          names = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+        function fmt(d) {
+          return d.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+          });
+        }
+        function render() {
+          var mon = new Date(base);
+          mon.setDate(base.getDate() + wk * 7);
+          var sun = new Date(mon);
+          sun.setDate(mon.getDate() + 6);
+          document.getElementById("cal-range").textContent =
+            fmt(mon) + " – " + fmt(sun);
+          var hdr = document.getElementById("cal-hdr");
+          hdr.innerHTML = "";
+          for (var i = 0; i < 7; i++) {
+            var dt = new Date(mon);
+            dt.setDate(mon.getDate() + i);
+            var today = dt.toDateString() === new Date().toDateString();
+            hdr.innerHTML +=
+              "<span" +
+              (today ? ' class="t"' : "") +
+              ">" +
+              names[i] +
+              "<b>" +
+              dt.getDate() +
+              "</b></span>";
+          }
+          var span = document.getElementById("cal-span");
+          span.innerHTML = "";
+          var cells = ["", "", "", "", "", "", ""];
+          if (wk === 0) {
+            events.forEach(function (e) {
+              if (e.span > 1) {
+                span.innerHTML +=
+                  '<div class="cal-span-ev" style="grid-column:' +
+                  (e.d + 1) +
+                  " / span " +
+                  e.span +
+                  '">' +
+                  e.n +
+                  " · " +
+                  e.v +
+                  "</div>";
+              } else {
+                cells[e.d] +=
+                  '<div class="cal-ev"><div class="cal-et">' +
+                  e.t +
+                  '</div><div class="cal-en">' +
+                  e.n +
+                  '</div><div class="cal-et">' +
+                  e.v +
+                  "</div></div>";
+              }
+            });
+          }
+          var grid = document.getElementById("cg");
+          grid.innerHTML = "";
+          for (var i = 0; i < 7; i++) {
+            grid.innerHTML +=
+              '<div class="cal-day">' +
+              (cells[i] || '<div class="cal-empty">No events</div>') +
+              "</div>";
+          }
+        }
+        window.calNav = function (n) {
+          wk += n;
+          render();
+        };
+        render();
+      })();
+    </script>
+  </div>
+</section>

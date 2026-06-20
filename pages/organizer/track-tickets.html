@@ -1,0 +1,20 @@
+<section class="space-y-6 fade-in">
+    <div class="flex items-center justify-between">
+        <div>
+            <h2 class="text-3xl font-bold">Track Tickets</h2>
+            <p class="text-slate-400 text-sm">Resolve AI matching conflicts directly with the Pyramid team.</p>
+        </div>
+        <button class="btn-secondary" onclick="navigateTo('organizer')">Back to Dashboard</button>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4">
+        <div class="kpi-card"><div class="kpi-label">Open</div><div class="kpi-value text-amber-400">1</div></div>
+        <div class="kpi-card"><div class="kpi-label">Awaiting Admin</div><div class="kpi-value text-cyan-400">1</div></div>
+        <div class="kpi-card"><div class="kpi-label">Resolved</div><div class="kpi-value text-emerald-400">1</div></div>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-6">
+        <div class="card space-y-2" id="ticket-list"></div>
+        <div class="lg:col-span-2 card" id="ticket-detail"></div>
+    </div>
+</section>

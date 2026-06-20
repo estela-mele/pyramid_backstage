@@ -1,0 +1,46 @@
+<section class="space-y-8 fade-in">
+  <div>
+    <h2 class="text-3xl font-bold">Event Planning Workspace</h2>
+    <p class="text-slate-400">Startup Albania Summit — Orange Hall · #EVT-2026-094</p>
+  </div>
+
+  <div class="grid lg:grid-cols-3 gap-6">
+    <div class="card space-y-4">
+      <h3 class="card-title">Allocated Assets</h3>
+      <div class="space-y-2 text-sm font-mono">
+        <div class="flex justify-between"><span>180 Chairs</span><span class="text-emerald-400">OK</span></div>
+        <div class="flex justify-between"><span>12 Tables</span><span class="text-emerald-400">OK</span></div>
+        <div id="workspace-projector-status" class="flex justify-between text-amber-400"><span>Projector #3</span><span>Conflict</span></div>
+        <div class="flex justify-between"><span>4 Microphones</span><span class="text-emerald-400">OK</span></div>
+      </div>
+    </div>
+
+    <div class="card space-y-4">
+      <h3 class="card-title">Task Playbook</h3>
+      <div class="space-y-2">
+        <label class="flex items-center gap-2 text-sm text-slate-300"><input type="checkbox" checked>Setup stage</label>
+        <label class="flex items-center gap-2 text-sm text-slate-300"><input type="checkbox" checked>Install screens</label>
+        <label class="flex items-center gap-2 text-sm text-slate-300"><input type="checkbox">Sound check</label>
+        <label class="flex items-center gap-2 text-sm text-slate-300"><input type="checkbox">Registration desk setup</label>
+      </div>
+    </div>
+
+    <div class="card space-y-4">
+      <h3 class="card-title">Teams Assigned</h3>
+      <div class="flex flex-wrap gap-2">
+        <span class="badge badge-info">Logistics Crew</span>
+        <span class="badge badge-info">AV Team Delta</span>
+        <span class="badge badge-warning">Security</span>
+      </div>
+    </div>
+  </div>
+
+  <button id="resolve-conflict-btn" class="btn-primary flex items-center gap-2 w-fit">
+    <i data-lucide="zap"></i> Resolve Conflict
+  </button>
+
+  <div id="ops-alert-banner" class="p-4 rounded-xl border border-amber-500/30 bg-amber-500/10 text-amber-400 flex items-center gap-3">
+    <i data-lucide="alert-triangle"></i>
+    <div><strong>Conflict detected:</strong> Projector #3 is double-booked across two events.</div>
+  </div>
+</section>

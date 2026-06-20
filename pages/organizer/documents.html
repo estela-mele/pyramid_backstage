@@ -1,0 +1,12 @@
+<div class="flex items-center justify-between">
+    <div>
+      <h2 class="text-3xl font-bold">Documents & Quotations</h2>
+      <p class="text-slate-400">Proposals, quotes and contracts for your events.</p>
+    </div>
+    <button class="btn-secondary" onclick="navigateTo('organizer')">Back to Dashboard</button>
+</div>
+
+<input id="doc-search" type="text" placeholder="Search events…" class="input-field max-w-xs" oninput="docFilter(this.value)">
+
+<!-- DOCUMENTS -->
+<div class="space-y-4" id="doc-events"></div>

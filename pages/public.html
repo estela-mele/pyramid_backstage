@@ -1,0 +1,259 @@
+<section class="space-y-10 fade-in">
+  <!-- HERO -->
+  <div class="relative overflow-hidden rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-950 to-slate-900 p-10">
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#06b6d4_1px,transparent_1px)] [background-size:24px_24px]"></div>
+    <div class="relative z-10 text-center max-w-4xl mx-auto">
+      <span class="badge badge-info mb-5">The Monument of the Future</span>
+      <h1 class="text-5xl md:text-6xl font-black tracking-tight leading-none mb-6">Pyramid Backstage</h1>
+      <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-8">
+        Transforming event operations from fragmented emails, spreadsheets and phone calls into one intelligent operational platform.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <button onclick="navigateTo('organizer')" class="btn-primary">Request Event Space</button>
+        <button onclick="loadPage('calendar')" class="btn-secondary">View Events Calendar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT THE PYRAMID -->
+  <div class="grid md:grid-cols-2 gap-6 items-center">
+    <div class="card overflow-hidden p-0">
+      <img src="assets/pyramid-exterior.jpg" class="w-full h-72 object-cover" alt="Pyramid of Tirana">
+    </div>
+    <div class="space-y-3">
+      <span class="badge badge-info">Since 1988</span>
+      <h2 class="text-2xl font-bold">The Pyramid of Tirana</h2>
+      <p class="text-slate-400 leading-relaxed">
+        Once a museum honoring Albania's history, the Pyramid has been reborn as a vibrant cultural and event hub
+        in the heart of Tirana — hosting conferences, exhibitions, hackathons and private celebrations beneath
+        its iconic glass-and-steel silhouette.
+      </p>
+    </div>
+  </div>
+
+  <!-- PLATFORM OVERVIEW -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="card">
+      <h3 class="card-title">Smart Venue Matching</h3>
+      <p class="card-subtitle">AI recommends the best venue based on audience size, equipment requirements, availability and event type.</p>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Unified Asset Tracking</h3>
+      <p class="card-subtitle">Track chairs, tables, microphones, projectors and technical equipment in real time.</p>
+    </div>
+    <div class="card">
+      <h3 class="card-title">Operational Command Center</h3>
+      <p class="card-subtitle">Coordinate logistics, approvals, setup teams and conflict resolution from one workspace.</p>
+    </div>
+  </div>
+
+  <!-- VENUES -->
+  <div>
+    <div class="flex justify-between items-center mb-5">
+      <div>
+        <h2 class="text-2xl font-bold">Pyramid Spaces</h2>
+        <p class="text-slate-400 text-sm">Available venues across the Pyramid ecosystem.</p>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+      <!-- RED -->
+      <div class="card group cursor-pointer relative overflow-hidden" onclick="openTour('red')">
+        <div class="relative -m-5 mb-4 bg-slate-950 rounded-t-2xl overflow-hidden">
+          <img src="assets/red-cube.jpg" class="w-full h-50 object-cover opacity-80 group-hover:opacity-100 transition">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent flex items-end justify-center pb-2">
+            <span class="badge badge-info flex items-center gap-1"><i data-lucide="box" class="w-3 h-3"></i> 3D Walkthrough</span>
+          </div>
+          <span class="absolute top-2 right-2 badge badge-info">Floor 1</span>
+        </div>
+        <h3 class="text-lg font-bold mb-2">Red Cube</h3>
+        <p class="text-slate-400 text-sm mb-4">Floor 1</p>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between"><span>Capacity</span><strong>250</strong></div>
+          <div class="flex justify-between"><span>Color</span><strong class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>Red</strong></div>
+          <div class="flex justify-between"><span>Area</span><strong>180 m²</strong></div>
+          <div class="flex justify-between"><span>Width</span><strong>12 m</strong></div>
+          <div class="flex justify-between"><span>Length</span><strong>15 m</strong></div>
+          <div class="flex justify-between"><span>Price</span><strong class="text-emerald-400">€450 / session</strong></div>
+          <div class="flex justify-between"><span>Status</span><span class="text-emerald-400">Available</span></div>
+        </div>
+      </div>
+
+      <!-- ORANGE -->
+      <div class="card">
+        <div class="relative -m-5 mb-4 bg-slate-950 rounded-t-2xl overflow-hidden">
+          <img src="assets/soon.webp" class="w-full h-50 object-cover" alt="Orange Hall">
+          <span class="absolute top-2 right-2 badge badge-info">Floor 0</span>
+        </div>
+        <h3 class="text-lg font-bold mb-2">Orange Hall</h3>
+        <p class="text-slate-400 text-sm mb-4">Floor 0</p>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between"><span>Capacity</span><strong>180</strong></div>
+          <div class="flex justify-between"><span>Color</span><strong class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-orange-500 inline-block"></span>Orange</strong></div>
+          <div class="flex justify-between"><span>Area</span><strong>140 m²</strong></div>
+          <div class="flex justify-between"><span>Width</span><strong>10 m</strong></div>
+          <div class="flex justify-between"><span>Length</span><strong>15 m</strong></div>
+          <div class="flex justify-between"><span>Price</span><strong class="text-emerald-400">€350 / session</strong></div>
+          <div class="flex justify-between"><span>Status</span><span class="text-amber-400">Reserved</span></div>
+        </div>
+      </div>
+
+      <!-- GREEN -->
+      <div class="card">
+        <div class="relative -m-5 mb-4 bg-slate-950 rounded-t-2xl overflow-hidden">
+          <img src="assets/soon.webp" class="w-full h-50 object-cover" alt="Green Hub">
+          <span class="absolute top-2 right-2 badge badge-info">Floor -1</span>
+        </div>
+        <h3 class="text-lg font-bold mb-2">Green Hub</h3>
+        <p class="text-slate-400 text-sm mb-4">Floor -1</p>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between"><span>Capacity</span><strong>120</strong></div>
+          <div class="flex justify-between"><span>Color</span><strong class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>Green</strong></div>
+          <div class="flex justify-between"><span>Area</span><strong>100 m²</strong></div>
+          <div class="flex justify-between"><span>Width</span><strong>8 m</strong></div>
+          <div class="flex justify-between"><span>Length</span><strong>12 m</strong></div>
+          <div class="flex justify-between"><span>Price</span><strong class="text-emerald-400">€280 / session</strong></div>
+          <div class="flex justify-between"><span>Status</span><span class="text-emerald-400">Available</span></div>
+        </div>
+      </div>
+
+      <!-- MUSTARD -->
+      <div class="card">
+        <div class="relative -m-5 mb-4 bg-slate-950 rounded-t-2xl overflow-hidden">
+          <img src="assets/soon.webp" class="w-full h-50 object-cover" alt="Yellow Studio">
+          <span class="absolute top-2 right-2 badge badge-info">Floor -1</span>
+        </div>
+        <h3 class="text-lg font-bold mb-2">Yellow Studio</h3>
+        <p class="text-slate-400 text-sm mb-4">Floor -1</p>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between"><span>Capacity</span><strong>80</strong></div>
+          <div class="flex justify-between"><span>Color</span><strong class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>Mustard</strong></div>
+          <div class="flex justify-between"><span>Area</span><strong>70 m²</strong></div>
+          <div class="flex justify-between"><span>Width</span><strong>7 m</strong></div>
+          <div class="flex justify-between"><span>Length</span><strong>4 m</strong></div>
+          <div class="flex justify-between"><span>Price</span><strong class="text-emerald-400">€200 / session</strong></div>
+          <div class="flex justify-between"><span>Status</span><span class="text-emerald-400">Available</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY IT MATTERS -->
+  <div class="card">
+    <h2 class="text-2xl font-bold mb-4">Why Pyramid Backstage?</h2>
+    <p class="text-slate-400 leading-relaxed mb-6">
+      Event requests often trigger hours of back-and-forth communication between venue managers, logistics teams,
+      inventory staff and organizers. Pyramid Backstage acts as the single source of truth for the entire event lifecycle.
+    </p>
+    <div class="grid md:grid-cols-4 gap-4">
+      <div class="kpi-card"><div class="kpi-label">Venue Matching</div><div class="kpi-value text-cyan-400">AI</div></div>
+      <div class="kpi-card"><div class="kpi-label">Asset Tracking</div><div class="kpi-value text-emerald-400">Live</div></div>
+      <div class="kpi-card"><div class="kpi-label">Conflict Detection</div><div class="kpi-value text-amber-400">Auto</div></div>
+      <div class="kpi-card"><div class="kpi-label">Planning</div><div class="kpi-value text-indigo-400">Unified</div></div>
+    </div>
+  </div>
+
+  <!-- EVENTS CALENDAR PREVIEW -->
+  <div>
+    <div class="flex justify-between items-center mb-5">
+      <div>
+        <h2 class="text-2xl font-bold">Events Calendar</h2>
+        <p class="text-slate-400 text-sm">What's happening across the Pyramid this week.</p>
+      </div>
+      <button onclick="loadPage('calendar')" class="btn-secondary">Open Full Calendar</button>
+    </div>
+    <div class="card space-y-3">
+      <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900 border border-slate-800">
+        <span class="badge badge-info">Tue</span>
+        <span class="font-medium flex-1">Hackathon Briefing</span>
+        <span class="text-slate-500 text-sm">Yellow Studio · 10:00</span>
+      </div>
+      <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900 border border-slate-800">
+        <span class="badge badge-warning">Wed</span>
+        <span class="font-medium flex-1">Startup Albania Summit</span>
+        <span class="text-slate-500 text-sm">Orange Hall · 09:00</span>
+      </div>
+      <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-900 border border-slate-800">
+        <span class="badge badge-success">Fri</span>
+        <span class="font-medium flex-1">Photography Exhibition</span>
+        <span class="text-slate-500 text-sm">Green Hub · 18:00</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREVIOUS EVENTS -->
+  <div>
+    <h2 class="text-2xl font-bold mb-5">Previous Events</h2>
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="card">
+        <div class="w-2 h-10 rounded-full bg-emerald-500 mb-3"></div>
+        <h3 class="font-bold mb-1">Tech Meetup</h3>
+        <p class="text-slate-500 text-sm">Green Hub · Jun 5, 2026</p>
+      </div>
+      <div class="card">
+        <div class="w-2 h-10 rounded-full bg-cyan-500 mb-3"></div>
+        <h3 class="font-bold mb-1">Design Week Tirana</h3>
+        <p class="text-slate-500 text-sm">Blue Hall · May 14, 2026</p>
+      </div>
+      <div class="card">
+        <div class="w-2 h-10 rounded-full bg-yellow-500 mb-3"></div>
+        <h3 class="font-bold mb-1">Hackathon Briefing</h3>
+        <p class="text-slate-500 text-sm">Yellow Studio · Apr 7, 2026</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARTNERS -->
+  <div>
+    <h2 class="text-2xl font-bold mb-5 text-center">Partners of the Pyramid</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+      <div class="card flex items-center justify-center h-24"><img src="assets/partner-aadf.png" class="max-h-10 opacity-80" alt="AADF"></div>
+      <div class="card flex items-center justify-center h-24"><img src="assets/partner-2.png" class="max-h-10 opacity-80" alt="Partner"></div>
+      <div class="card flex items-center justify-center h-24"><img src="assets/partner-3.png" class="max-h-10 opacity-80" alt="Partner"></div>
+      <div class="card flex items-center justify-center h-24"><img src="assets/partner-4.png" class="max-h-10 opacity-80" alt="Partner"></div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div>
+    <div class="text-center mb-6">
+      <h2 class="text-2xl font-bold">Get in Touch</h2>
+      <p class="text-slate-400 text-sm">Find us at the heart of Tirana</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="card space-y-5">
+        <div class="flex items-start gap-3">
+          <div class="p-2.5 rounded-full bg-cyan-500/10 text-cyan-400"><i data-lucide="map-pin" class="w-5 h-5"></i></div>
+          <div>
+            <div class="font-medium">Location</div>
+            <p class="text-slate-400 text-sm">Pyramid of Tirana, Bulevardi Dëshmorët e Kombit 5, Tiranë, Albania</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="p-2.5 rounded-full bg-cyan-500/10 text-cyan-400"><i data-lucide="mail" class="w-5 h-5"></i></div>
+          <div>
+            <div class="font-medium">Email</div>
+            <a href="mailto:info@piramida.edu.al" class="text-slate-400 text-sm hover:text-cyan-400 transition">info@piramida.edu.al</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 pt-3 border-t border-slate-800">
+          <a href="#" class="p-2.5 rounded-full bg-slate-900 border border-slate-800 hover:border-cyan-500 hover:text-cyan-400 transition" aria-label="Facebook"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+          <a href="#" class="p-2.5 rounded-full bg-slate-900 border border-slate-800 hover:border-cyan-500 hover:text-cyan-400 transition" aria-label="Instagram"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+          <a href="#" class="p-2.5 rounded-full bg-slate-900 border border-slate-800 hover:border-cyan-500 hover:text-cyan-400 transition" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+      <div class="card overflow-hidden p-0 relative">
+        <span class="badge badge-info absolute top-4 left-4 z-10">Pyramid of Tirana</span>
+        <iframe class="w-full h-full min-h-[240px] rounded-xl" style="border:0" loading="lazy"
+          src="https://maps.google.com/maps?q=Piramida%20e%20Tiran%C3%ABs%2C%20Bulevardi%20D%C3%ABshmor%C3%ABt%20e%20Kombit%205%2C%20Tiran%C3%AB&output=embed"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOUR MODAL -->
+  <div id="tour-modal" class="hidden fixed inset-0 bg-black z-[100] flex items-center justify-center p-4" onclick="closeTour(event)">
+    <div class="relative w-full max-w-5xl aspect-video">
+      <video id="tour-video" class="w-full h-full rounded-2xl object-cover pointer-events-none" autoplay muted loop playsinline></video>
+      <button onclick="closeTour(event)" class="absolute -top-10 right-0 text-slate-300 hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+    </div>
+  </div>
+</section>
